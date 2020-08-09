@@ -1,0 +1,91 @@
+version: '2'
+
+services: 
+    db:
+        restart: always
+        build: ./database
+        volumes_from: 
+            - data
+        volumes: 
+            - ./backups/postgresql:/backup
+        environment: 
+            POSTGRES_PASSWORD: SiGeAgro2020*-
+        ports: 
+            - "5432"
+    adminer:
+        restart: always
+        image: adminer
+        links: 
+            - db:db
+        ports: 
+            - 9090:9090
+    web:
+        restart: always
+        build: ./django
+        command: bash -c "python manage.py migrate && python manage.py makemigrations && gunicorn sigeagro.wsgi:application -w 2 -b :8800"
+        volumes: 
+            - ./django:/code
+        links: 
+            - redis:redis
+            - nodeapi:nodeapi
+        ports: 
+            - "8800:8800"
+        depends_on: 
+            - db
+        environment: 
+            - DJANGO_SETTINGS_MODULE=sigeagro.settings
+        env_file: 
+            - .env
+    nginx:
+        restart: always
+        build: ./nginx/
+        ports: 
+            - "81:81"
+        volumes_from: 
+            - web
+        links: 
+            - web:web
+    redis:
+        restart: always
+        image: redis:latest
+        expose: 
+            - "6379"
+    data:
+        restart: always
+        image: alpine
+        volumes: 
+            - postgres_data:/postgres/data
+        command: "true"
+    mongo:
+        image: mongo
+        ports: 
+            - "27017"
+        volumes:
+            - mongodata:/data/db
+    mongo-express:
+        restart: always
+        image: mongo-express
+        depends_on: 
+            - mongo
+        links: 
+            - mongo
+        ports:
+            - "5001:8081"
+    nodeapi:
+        restart: always
+        build: ./nodeapi
+        ports:
+            - "3501:3501"
+        command: bash -c "npm run dev"
+        volumes:
+            - ./nodeapi:/backend
+            - /backend/node_modules
+        depends_on:
+            - mongo
+        links:
+            - mongo
+            - mongo-express
+
+volumes: 
+    postgres_data:
+    mongodata:
