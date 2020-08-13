@@ -1,6 +1,6 @@
 server {
     listen 81;
-    server_name onfalo.sp3.gob.ve;
+    server_name localhost;
     charset utf-8;
 
     location /static {

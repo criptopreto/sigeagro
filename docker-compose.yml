@@ -1,13 +1,13 @@
 version: '2'
 
 services: 
-    db:
+    d_b:
         restart: always
-        build: ./database
+        build: ./data_base
         volumes_from: 
             - data
         volumes: 
-            - ./backups/postgresql:/backup
+            - ./backups/postgres:/backup
         environment: 
             POSTGRES_PASSWORD: SiGeAgro2020*-
         ports: 
@@ -16,13 +16,13 @@ services:
         restart: always
         image: adminer
         links: 
-            - db:db
+            - d_b:d_b
         ports: 
             - 9090:9090
     web:
         restart: always
         build: ./django
-        command: bash -c "python manage.py migrate && python manage.py makemigrations && gunicorn sigeagro.wsgi:application -w 2 -b :8800"
+        command: bash -c "python manage.py migrate --noinput && python manage.py makemigrations && python manage.py collectstatic --noinput && gunicorn sigeagro.wsgi:application -w 2 -b :8800"
         volumes: 
             - ./django:/code
         links: 
@@ -31,7 +31,7 @@ services:
         ports: 
             - "8800:8800"
         depends_on: 
-            - db
+            - d_b
         environment: 
             - DJANGO_SETTINGS_MODULE=sigeagro.settings
         env_file: 
@@ -61,7 +61,7 @@ services:
         ports: 
             - "27017"
         volumes:
-            - mongodata:/data/db
+            - mongodata:/data/d_b
     mongo-express:
         restart: always
         image: mongo-express
@@ -73,12 +73,12 @@ services:
             - "5001:8081"
     nodeapi:
         restart: always
-        build: ./nodeapi
+        build: ./node_api
         ports:
             - "3501:3501"
         command: bash -c "npm run dev"
         volumes:
-            - ./nodeapi:/backend
+            - ./node_api:/backend
             - /backend/node_modules
         depends_on:
             - mongo

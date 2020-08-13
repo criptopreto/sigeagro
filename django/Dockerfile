@@ -1,5 +1,6 @@
 FROM python:3.8-alpine
 
+ENV TZ America/Caracas
 RUN mkdir -p /code
 WORKDIR /code
 COPY requirements.txt /code

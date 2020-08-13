@@ -6,6 +6,6 @@ ENV POSTGRES_PASSWORD SiGeAgro2020*-
 ENV POSTGRES_USER postgres
 ENV POSTGRES_DB postgres
 
-VOLUME [ "/postgres/data" ]
+VOLUME [ "/postgresql/data" ]
 
 EXPOSE 5432

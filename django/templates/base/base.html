@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-ve">
+<head>
+    <link rel="stylesheet" href="{% static 'vendor/mdbootstrap/css/bootstrap.min.css' %}">
+    
+    <script src="https://kit.fontawesome.com/77839478fe.js" crossorigin="anonymous"></script>
+    <link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css" media="all" rel="stylesheet">
+    <link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css" media="all" rel="stylesheet">
+    <link href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'vendor/mdbootstrap/css/mdb.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block extracss %}
+    {% endblock extracss %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SP3{% endblock title %}</title>
+</head>
+<body class="fixed-sn black-skin">
+    <div class="blocker"><div class="sbl-circ-ripple"></div></div>
+    <header>
+        {% block navbar %}
+        {% endblock navbar %}
+        {% block header %}
+            <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav bg-dark navbar-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
+                    aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse ml-2" id="navbarSupportedContent-555">
+                    <ul class="navbar-nav mr-auto">
+                    <li class="nav-item {% if request.path == "/" %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'index' %}"> <i class="fas fa-home"></i> Inicio
+                        <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item {% if request.path == "/infosep/" or request.path == "/infosep/exploradores" %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'infosep:infosep_index' %}"><i class="fas fa-people-arrows"></i> Infosep
+                        <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {% if request.path == "/ueep/" or request.path == "/ueep/map" %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'ueep:ueep_index' %}"><i class="fas fa-user-secret fa-inverse"></i> UEEP
+                        <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {% if request.path == "/sgi/" or request.path == "/sgi" %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'sgi:sgi_index' %}"><i class="fas fa-project-diagram"></i> SGI
+                        <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {% if request.path == "/onfanet/" or request.path == "/onfanet" %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'ueep:ueep_index' %}"><i class="fas fa-server"></i> Onfanet
+                        <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto nav-flex-icons">
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect waves-light">1
+                        <i class="fas fa-envelope"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item avatar dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <img src="{% static 'imagenes/avatar-2.jpg' %}" class="rounded-circle z-depth-0"
+                            alt="avatar image">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+                        aria-labelledby="navbarDropdownMenuLink-55">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a>
+                        </div>
+                    </li>
+                    </ul>
+                    {% else %}
+                    </ul>
+                    <ul class="navbar-nav ml-auto nav-flex-icons">
+                        <li class="nav-item {% if request.path == "/accounts/login/" or request.path == "/accounts/login" %}active{% endif %}">
+                            <a class="nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                            <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                    </ul>
+                    {% endif %}
+                </div>
+            </nav>
+        {% endblock header %}
+    </header>
+    {% block content %}{% endblock content %}
+    {% block modals %}{% endblock modals %}
+    {% block footer %}{% endblock footer %}
+    <script src="{% static 'vendor/mdbootstrap/js/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/mdbootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'vendor/mdbootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendor/mdbootstrap/js/mdb.min.js' %}"></script>
+    {% block extrajs %}
+    {% endblock extrajs %}
+    {% block extrascript %}
+    {% endblock extrascript %}
+</body>
+</html>
