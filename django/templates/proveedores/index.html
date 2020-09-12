@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block extracss %}
+    <link rel="stylesheet" href="{% static 'base/sidebar.css' %}">
+{% endblock extracss %}
+
+{% block navbar %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 ml-3">
+                <p class="brand text-center">SIGEAGRO</p>
+            </div>
+            <nav class="col-lg-10 col-md-10"></nav>
+        </div>
+    </div>
+{% endblock navbar %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <!--SIDEBAR-->
+            <nav id="sidebarMenu" class="col-lg-2 d-md-block col-md-2 bg-light sidebar collapse">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a href="{% url 'index' %}" class="nav-link"><i class="fa fa-solar-panel"></i> Panel Principal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'procesos:procesos_index' %}" class="nav-link"><i class="fa fa-exchange-alt"></i> Procesos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'inventario:inventario_index' %}" class="nav-link"><i class="fa fa-boxes"></i> Inventario</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'proveedores:proveedores_index' %}" class="nav-link active"><i class="fa fa-truck-moving"></i> Proveedores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'clientes:clientes_index' %}" class="nav-link"><i class="fa fa-users"></i> Clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'graficos:graficos_index' %}" class="nav-link"><i class="fa fa-chart-line"></i> Gráficos</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+{% endblock content %}

@@ -37,15 +37,20 @@
                 <div class="col-4">
                     <div class="form-login-wrapper">
                         <div class="login-card">
-                            <form action="" class="login-card-content">
+                            <form action="{% url 'login' %}" method='post' class="login-card-content">
+                                {% csrf_token %}
                                 <div class="login-form-group mb-2">
-                                    <input type="text" class="login-form-control" id="username" name="username" placeholder="Usuario">
+                                    {{ form.username|add_class_placeholder:'login-form-control,Usuario'}}
                                 </div>
                                 <div class="login-form-group mb-2">
-                                    <input type="password" class="login-form-control" id="password" name="password" placeholder="Contraseña">
+                                    {{ form.password|add_class_placeholder:'login-form-control,Usuario' }}
                                 </div>
-                                <div class="login-form-group mb-2">
-                                    <button class="btn btn-block btn-login">Iniciar Sesión</button>            
+                                {% if form.errors %}
+                                    <p class="text-danger">El Usuario o la Contraseña son incorrectos, por favor, intente nuevamente.</p>
+                                {% endif %}
+                                <div class="login-form-group mb-2">  
+                                    <input type="submit" value="Iniciar Sesión" class="btn btn-block btn-login" />
+                                    <input type="hidden" name="next" value="{{ next }}" />     
                                 </div>
                                 <hr>
                                 <a href="{% url 'password_reset' %}" class="login-link-recovery">¿Olvidaste tu Cuenta?</a>

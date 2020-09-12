@@ -26,7 +26,7 @@ SECRET_KEY = '(06*t-b&tqwtcnl#)8ie5q$fe8inig&=l4e)931+c=2xlbztov'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.43.33', 'localhost']
 
 
 # Application definition
@@ -38,7 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'agrodb'
+    'agrodb',
+    'procesos',
+    'inventario',
+    'proveedores',
+    'clientes',
+    'graficos',
 ]
 
 MIDDLEWARE = [

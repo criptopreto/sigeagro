@@ -15,9 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from principal.views import Index
 
 urlpatterns = [
+    path('', Index, name='index'),
     path('admin/', admin.site.urls),
     path('principal/', include(('principal.urls', 'principal'), namespace='principal')),
+    path('procesos/', include(('procesos.urls', 'procesos'), namespace='procesos')),
+    path('inventario/', include(('inventario.urls', 'inventario'), namespace='inventario')),
+    path('proveedores/', include(('proveedores.urls', 'proveedores'), namespace='proveedores')),
+    path('clientes/', include(('clientes.urls', 'clientes'), namespace='clientes')),
+    path('graficos/', include(('graficos.urls', 'graficos'), namespace='graficos')),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
