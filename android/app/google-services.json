@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1018606288530",
+    "project_id": "jobix-app",
+    "storage_bucket": "jobix-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018606288530:android:e9551b420d04b3ee27f04b",
+        "android_client_info": {
+          "package_name": "com.sangonzalo.jobix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1018606288530-1o8ito05j14vat95s4u6laroa6q1agle.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHaMzEoWnD7NlapfTzBV7EzUfkQ3g_Hpo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1018606288530-1o8ito05j14vat95s4u6laroa6q1agle.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1018606288530-o92fbg1g4r7nem163kiqv55fnlo5be05.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.jobix"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
